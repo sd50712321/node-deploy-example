@@ -1,4 +1,6 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { RedisClientOptions } from 'redis';
+import * as redisStore from 'cache-manager-redis-store';
+import { CacheModule, forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
@@ -14,6 +16,14 @@ import { UserApiModule } from './user-api.module';
     //   ttl: 60 * 1000, // 1 minute
     //   limit: 100,
     // }),
+    CacheModule.registerAsync({
+      useFactory: () => ({
+        store: redisStore,
+        host: 'redis-server',
+        port: 6379,
+        ttl: 0,
+      }),
+    }),
     forwardRef(() =>
       RouterModule.register([
         {

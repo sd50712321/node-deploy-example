@@ -1,7 +1,10 @@
+import { Cache } from 'cache-manager';
 import {
   Body,
+  CACHE_MANAGER,
   Controller,
   Get,
+  Inject,
   Logger,
   NotFoundException,
   Post,
@@ -30,7 +33,19 @@ export class AuthController {
     private readonly secretService: SecretService,
     // private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
+
+  @Get('/test')
+  @ApiTags('테스트')
+  @ApiOperation({
+    summary: '테스트',
+    description: 'accesstoken을 반환합니다',
+  })
+  @ApiOkResponse({ type: AuthSignInResultResponse })
+  async signIn(@Body() authSignInDto: AuthSignInDto): Promise<void> {
+    const value = await this.cacheManager.set('key', 'value');
+  }
 
   // @Post('/signin')
   // @ApiTags('인증')
