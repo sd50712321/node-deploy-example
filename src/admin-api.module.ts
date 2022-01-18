@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { CacheModule, forwardRef, Module } from '@nestjs/common';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
@@ -21,6 +21,12 @@ import { JwtModule } from '@nestjs/jwt';
             // expiresIn: 1,
           },
         }),
+      }),
+    ),
+    forwardRef(() =>
+      CacheModule.register({
+        ttl: 0,
+        isGlobal: true,
       }),
     ),
   ],
