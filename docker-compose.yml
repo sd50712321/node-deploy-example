@@ -5,4 +5,15 @@ services:
   app:
     build: .
     ports:
+      - "4000:4000"
+
+  react:
+    build:
+      context: ./react-app
+      dockerfile: Dockerfile
+    ports:
       - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - ./react-app:/app
+    stdin_open: true

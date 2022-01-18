@@ -72,7 +72,7 @@ async function bootstrap() {
     include: [UserApiModule],
   });
   SwaggerModule.setup('api/user', app, document2);
-  const port = 3000;
+  const port = 4000;
   await app.listen(port);
   logger.log(`Application is running on: ${port}`);
 }
