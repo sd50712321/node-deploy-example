@@ -10,7 +10,7 @@ services:
   react:
     build:
       context: ./react-app
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     ports:
       - "3000:3000"
     volumes:
