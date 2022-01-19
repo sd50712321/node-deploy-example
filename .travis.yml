@@ -6,7 +6,7 @@ services:
   - docker
 
 before_install:
-  - echo "start Creating an image with dockerfile"
+  - echo "start Creatin an image with dockerfile"
   - cd react-app | docker build -t react-app .
 
 script:
